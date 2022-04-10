@@ -23,6 +23,7 @@ app = Flask(__name__)
 # LINE 聊天機器人的基本資料
 config = configparser.ConfigParser()
 config.read('config.ini')
+ptinr
 
 line_bot_api = LineBotApi(config.get('line-bot', 'channel_access_token'))
 handler = WebhookHandler(config.get('line-bot', 'channel_secret'))
@@ -72,14 +73,14 @@ def callback():
 
 
 def get_answer(message_text):
-    url = config.get('QnAMaker', 'url')
+    url = "https://dorisqna.azurewebsites.net/qnamaker/knowledgebases/7ae7d42c-68eb-457e-a016-1b43ff902fa2/generateAnswer"
     # 發送request到QnAMaker Endpoint要答案
     response = requests.post(
         url,
         json.dumps({'question': message_text}),
         headers={
             'Content-Type': 'application/json',
-            'Authorization': config.get('QnAMaker', 'authorization')
+            'Authorization': 'EndpointKey ec1ce62c-7f65-4315-aa34-018ab0c2d43c'
         }
     )
 
